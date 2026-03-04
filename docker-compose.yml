@@ -1,0 +1,35 @@
+services:
+  opencode:
+    build: .
+    stdin_open: true
+    tty: true
+    working_dir: /data/${HOST_DIR:-.}
+    network_mode: host
+    volumes:
+      - ${HOST_DIR:-.}:/data/${HOST_DIR:-.}
+      - ./opencode-config:/home/agent/.config/opencode
+      - agent-local:/home/agent/.local
+      - agent-cache:/home/agent/.cache
+      - agent-npm:/home/agent/.npm
+    environment:
+      - GH_TOKEN
+      - TERM=$TERM
+      - LS_COLORS=$LS_COLORS
+      - COLORTERM=$COLORTERM
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+      - DAC_OVERRIDE
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 16G
+
+volumes:
+  agent-local:
+  agent-cache:
+  agent-npm:

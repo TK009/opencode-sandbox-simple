@@ -1,0 +1,8 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": "allow",
+  "instructions": ["~/.config/opencode/AGENTS-environment.md"],
+  // Plugin that keeps context shorter in cost of chache misses (doesn't matter in github copilot request-based pricing).
+  // Enable when ready to experiment with it.
+  //"plugin": ["@tarquinen/opencode-dcp"]
+}
