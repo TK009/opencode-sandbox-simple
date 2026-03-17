@@ -30,6 +30,6 @@ ENV EDITOR=vim
 
 # Inline entrypoint: authenticate gh if token provided, then exec command
 ENTRYPOINT ["/bin/bash", "-c", \
-    "if [ -n \"$GH_TOKEN\" ]; then echo \"$GH_TOKEN\" | gh auth login --with-token 2>/dev/null && gh auth setup-git 2>/dev/null; fi && exec \"$@\"", \
+    "if [ -n \"$GH_TOKEN\" ]; then echo \"$GH_TOKEN\" | env -u GH_TOKEN gh auth login --with-token 2>/dev/null; gh auth setup-git 2>/dev/null; fi && exec \"$@\"", \
     "--"]
 CMD ["opencode"]
